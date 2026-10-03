@@ -1,0 +1,72 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: var(--font-bricolage), ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto,
+    sans-serif;
+  --color-ink: #10202b;
+  --color-muted: #475663;
+  --color-line: #cfdae2;
+  --color-surface: #f1f5f8;
+  --color-brand: #0b6b8a;
+  --color-brand-dark: #08536b;
+  --color-brand-soft: #e1f0f5;
+  --color-danger: #b42318;
+  --color-danger-dark: #8f1d14;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    background-color: var(--color-surface);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  :focus-visible {
+    outline: 3px solid var(--color-brand);
+    outline-offset: 2px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex min-h-11 cursor-pointer items-center justify-center gap-2 rounded-lg px-4 text-sm font-semibold transition-colors disabled:cursor-not-allowed disabled:opacity-60;
+  }
+  .btn-primary {
+    @apply bg-brand text-white hover:bg-brand-dark;
+  }
+  .btn-secondary {
+    @apply border border-line bg-white text-ink hover:bg-brand-soft;
+  }
+  .btn-danger {
+    @apply bg-danger text-white hover:bg-danger-dark;
+  }
+  .btn-ghost {
+    @apply text-ink hover:bg-brand-soft;
+  }
+  .field {
+    @apply block min-h-11 w-full rounded-lg border border-line bg-white px-3 py-2 text-base text-ink placeholder:text-muted;
+  }
+  .label {
+    @apply mb-1.5 block text-sm font-semibold text-ink;
+  }
+  .card {
+    @apply rounded-2xl border border-line bg-white;
+  }
+  .skip-link {
+    @apply absolute left-3 top-3 z-[100] -translate-y-20 rounded-lg bg-brand px-4 py-2 text-sm font-semibold text-white focus:translate-y-0;
+  }
+}
