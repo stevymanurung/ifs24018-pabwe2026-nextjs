@@ -5,9 +5,16 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   compress: true,
   // Turbopack aktif (default pada `next dev --turbopack` dan `next build`).
-  turbopack: {},
+  turbopack: {
+    resolveAlias: {
+      // Buang polyfill legacy bawaan Next (lihat polyfills/modern-polyfills.js).
+      '../build/polyfills/polyfill-module': './polyfills/modern-polyfills.js',
+    },
+  },
   experimental: {
     optimizePackageImports: ['react-icons/fi'],
+    // Menyisipkan CSS langsung ke HTML agar tidak ada render-blocking request.
+    inlineCss: true,
   },
 };
 

@@ -39,3 +39,10 @@ APP_PORT=3000
 2. Netlify → *Add new site → Import from Git*, pilih repositori tersebut.
 3. **Site name** wajib `ifs24018-pabwe2026-nextjs` (URL: `https://ifs24018-pabwe2026-nextjs.netlify.app`).
 4. Build command `npm run build` (sudah di `netlify.toml`). Variabel `NEXT_PUBLIC_DELCOM_BASEURL` juga sudah di `netlify.toml`.
+
+## Optimasi performa (Lighthouse)
+
+- `next.config.ts` → `experimental.inlineCss: true`: CSS disisipkan ke HTML sehingga tidak ada render-blocking request.
+- `next.config.ts` → `turbopack.resolveAlias`: polyfill legacy bawaan Next diganti `polyfills/modern-polyfills.js`
+  (hanya `URL.canParse`), karena fitur lain sudah native di browser modern (menghilangkan audit "Legacy JavaScript").
+- SweetAlert2 dimuat secara lazy (`import()`), gambar memakai `width`/`height` + `loading="lazy"`.
