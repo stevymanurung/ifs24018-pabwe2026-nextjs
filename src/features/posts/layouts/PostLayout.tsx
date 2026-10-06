@@ -10,7 +10,7 @@ import { asyncReceiveProfile } from '@/features/users/states/action';
 import NavbarComponent from '@/features/posts/components/NavbarComponent';
 import SidebarComponent from '@/features/posts/components/SidebarComponent';
 
-export default function PostLayout({ children }: { children: ReactNode }) {
+export default function PostLayout({ children }: Readonly<{ children: ReactNode }>) {
   const dispatch = useAppDispatch();
   const router = useRouter();
   const isProfile = useAppSelector((state) => state.isProfile);

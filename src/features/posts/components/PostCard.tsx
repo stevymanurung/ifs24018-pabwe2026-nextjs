@@ -12,7 +12,7 @@ interface PostCardProps {
   onToggleLike: (post: Post, liked: boolean) => void;
 }
 
-export default function PostCard({ post, liked, onToggleLike }: PostCardProps) {
+export default function PostCard({ post, liked, onToggleLike }: Readonly<PostCardProps>) {
   const cover = resolveAssetUrl(post.cover);
 
   return (

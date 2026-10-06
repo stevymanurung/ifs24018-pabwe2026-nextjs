@@ -16,7 +16,7 @@ const ITEMS = [
   { href: '/profile', label: 'Profil Saya', icon: FiUser, match: '/profile' },
 ] as const;
 
-export default function SidebarComponent({ open, onClose }: SidebarProps) {
+export default function SidebarComponent({ open, onClose }: Readonly<SidebarProps>) {
   const pathname = usePathname();
   const isMe = useSearchParams().get('filter') === 'me';
 

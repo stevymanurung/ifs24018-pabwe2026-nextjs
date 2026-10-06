@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import type { ChangeEvent, FormEvent } from 'react';
+import type { ChangeEvent, SubmitEvent } from 'react';
 import Avatar from '@/components/Avatar';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 import { useInput } from '@/hooks/useInput';
@@ -29,7 +29,7 @@ export default function ProfilePage() {
   const [newPassword, onNewPasswordChange, setNewPassword] = useInput('');
   const [confirmation, onConfirmationChange, setConfirmation] = useInput('');
 
-  async function handleProfileSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleProfileSubmit(event: SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
     if (!name.trim() || !EMAIL_PATTERN.test(email.trim())) {
       await showWarningDialog('Nama dan email yang valid wajib diisi.');
@@ -48,7 +48,7 @@ export default function ProfilePage() {
     setPhoto(selected);
   }
 
-  async function handlePhotoSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handlePhotoSubmit(event: SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
     if (!photo) {
       await showWarningDialog('Pilih foto profil terlebih dahulu.');
@@ -60,7 +60,7 @@ export default function ProfilePage() {
     }
   }
 
-  async function handlePasswordSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handlePasswordSubmit(event: SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
     if (!password || newPassword.length < 6) {
       await showWarningDialog('Isi kata sandi saat ini dan kata sandi baru (minimal 6 karakter).');

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import type { FormEvent } from 'react';
+import type { SubmitEvent } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useAppDispatch } from '@/hooks/redux';
@@ -18,7 +18,7 @@ export default function LoginPage() {
   const [password, onPasswordChange] = useInput('');
   const [submitting, setSubmitting] = useState(false);
 
-  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
     if (!EMAIL_PATTERN.test(email.trim()) || !password) {
       await showWarningDialog('Masukkan email yang valid dan kata sandi Anda.');

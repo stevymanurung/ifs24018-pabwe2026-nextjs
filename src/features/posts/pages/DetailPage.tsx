@@ -2,7 +2,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import type { FormEvent } from 'react';
+import type { SubmitEvent } from 'react';
 import Link from 'next/link';
 import { useParams, useRouter } from 'next/navigation';
 import { FiArrowLeft, FiEdit2, FiHeart, FiImage, FiTrash2 } from 'react-icons/fi';
@@ -78,7 +78,7 @@ export default function DetailPage() {
     if (confirmed && (await dispatch(asyncDeletePost(postId)))) router.replace('/');
   }
 
-  async function handleAddComment(event: FormEvent<HTMLFormElement>) {
+  async function handleAddComment(event: SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
     if (!comment.trim()) {
       await showWarningDialog('Komentar tidak boleh kosong.');

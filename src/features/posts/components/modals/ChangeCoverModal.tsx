@@ -2,7 +2,7 @@
 'use client';
 
 import { useEffect, useMemo, useState } from 'react';
-import type { ChangeEvent, FormEvent } from 'react';
+import type { ChangeEvent, SubmitEvent } from 'react';
 import ModalShell from '@/components/ModalShell';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 import { showWarningDialog } from '@/helpers/toolsHelper';
@@ -14,7 +14,7 @@ interface ChangeCoverModalProps {
   onChanged: () => void;
 }
 
-export default function ChangeCoverModal({ postId, onClose, onChanged }: ChangeCoverModalProps) {
+export default function ChangeCoverModal({ postId, onClose, onChanged }: Readonly<ChangeCoverModalProps>) {
   const dispatch = useAppDispatch();
   const submitting = useAppSelector((state) => state.isPostChangeCover);
   const [file, setFile] = useState<File | null>(null);
@@ -36,7 +36,7 @@ export default function ChangeCoverModal({ postId, onClose, onChanged }: ChangeC
     setFile(selected);
   }
 
-  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
     if (!file) {
       await showWarningDialog('Pilih gambar cover terlebih dahulu.');

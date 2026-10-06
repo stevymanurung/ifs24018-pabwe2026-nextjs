@@ -14,9 +14,9 @@ function loadEnvFile(file: string): void {
   const path = resolve(process.cwd(), file);
   if (!existsSync(path)) return;
   for (const line of readFileSync(path, 'utf8').split(/\r?\n/)) {
-    const match = line.match(/^\s*([\w.-]+)\s*=\s*(.*)\s*$/);
+    const match = /^\s*([\w.-]+)\s*=\s*(.*)\s*$/.exec(line);
     if (match && process.env[match[1]] === undefined) {
-      process.env[match[1]] = match[2].replace(/^['"]|['"]$/g, '');
+      process.env[match[1]] = match[2].replaceAll(/(?:^['"])|(?:['"]$)/g, '');
     }
   }
 }
@@ -31,8 +31,8 @@ const port = Number(process.env.APP_PORT ?? 3000);
 const app = next({ dev, hostname, port });
 const handle = app.getRequestHandler();
 
-app.prepare().then(() => {
-  createServer((req, res) => handle(req, res)).listen(port, hostname, () => {
-    console.log(`> Ruang Post siap di http://localhost:${port} (${dev ? 'development' : 'production'})`);
-  });
+await app.prepare();
+
+createServer((req, res) => handle(req, res)).listen(port, hostname, () => {
+  console.log(`> Ruang Post siap di http://localhost:${port} (${dev ? 'development' : 'production'})`);
 });

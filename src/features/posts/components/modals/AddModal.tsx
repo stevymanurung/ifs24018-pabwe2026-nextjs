@@ -1,6 +1,6 @@
 'use client';
 
-import type { FormEvent } from 'react';
+import type { SubmitEvent } from 'react';
 import ModalShell from '@/components/ModalShell';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 import { useInput } from '@/hooks/useInput';
@@ -12,12 +12,12 @@ interface AddModalProps {
   onAdded: (postId: number) => void;
 }
 
-export default function AddModal({ onClose, onAdded }: AddModalProps) {
+export default function AddModal({ onClose, onAdded }: Readonly<AddModalProps>) {
   const dispatch = useAppDispatch();
   const submitting = useAppSelector((state) => state.isPostAdd);
   const [description, onDescriptionChange] = useInput('');
 
-  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
     if (!description.trim()) {
       await showWarningDialog('Deskripsi postingan tidak boleh kosong.');

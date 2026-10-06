@@ -11,7 +11,7 @@ interface AvatarProps {
 }
 
 /** Foto profil bulat; memakai inisial nama bila foto belum diatur. */
-export default function Avatar({ name, photo, size }: AvatarProps) {
+export default function Avatar({ name, photo, size }: Readonly<AvatarProps>) {
   const src = resolveAssetUrl(photo);
   const classes = `${SIZES[size]} shrink-0 rounded-full`;
 

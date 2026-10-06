@@ -1,6 +1,6 @@
 'use client';
 
-import type { FormEvent } from 'react';
+import type { SubmitEvent } from 'react';
 import ModalShell from '@/components/ModalShell';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 import { useInput } from '@/hooks/useInput';
@@ -14,12 +14,12 @@ interface ChangeModalProps {
   onChanged: () => void;
 }
 
-export default function ChangeModal({ postId, description, onClose, onChanged }: ChangeModalProps) {
+export default function ChangeModal({ postId, description, onClose, onChanged }: Readonly<ChangeModalProps>) {
   const dispatch = useAppDispatch();
   const submitting = useAppSelector((state) => state.isPostChange);
   const [value, onValueChange] = useInput(description);
 
-  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
     if (!value.trim()) {
       await showWarningDialog('Deskripsi postingan tidak boleh kosong.');

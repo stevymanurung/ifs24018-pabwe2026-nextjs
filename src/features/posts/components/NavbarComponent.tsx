@@ -9,7 +9,7 @@ import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 import { showConfirmDialog } from '@/helpers/toolsHelper';
 import { asyncLogout } from '@/features/auth/states/action';
 
-export default function NavbarComponent({ onMenuClick }: { onMenuClick: () => void }) {
+export default function NavbarComponent({ onMenuClick }: Readonly<{ onMenuClick: () => void }>) {
   const dispatch = useAppDispatch();
   const router = useRouter();
   const profile = useAppSelector((state) => state.profile);

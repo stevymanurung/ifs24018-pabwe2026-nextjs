@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import type { FormEvent } from 'react';
+import type { SubmitEvent } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useAppDispatch } from '@/hooks/redux';
@@ -20,7 +20,7 @@ export default function RegisterPage() {
   const [confirmation, onConfirmationChange] = useInput('');
   const [submitting, setSubmitting] = useState(false);
 
-  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
     if (!name.trim() || !EMAIL_PATTERN.test(email.trim())) {
       await showWarningDialog('Nama dan email yang valid wajib diisi.');

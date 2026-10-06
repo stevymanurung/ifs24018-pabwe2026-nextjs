@@ -11,9 +11,9 @@ interface ModalShellProps {
 }
 
 /** Kerangka dialog modal yang aksesibel (role=dialog, Escape, klik latar, fokus awal). */
-export default function ModalShell({ title, onClose, children }: ModalShellProps) {
+export default function ModalShell({ title, onClose, children }: Readonly<ModalShellProps>) {
   const titleId = useId();
-  const panelRef = useRef<HTMLDivElement>(null);
+  const panelRef = useRef<HTMLDialogElement>(null);
 
   useEffect(() => {
     panelRef.current?.querySelector<HTMLElement>('textarea, input, select')?.focus();
@@ -33,12 +33,12 @@ export default function ModalShell({ title, onClose, children }: ModalShellProps
         className="absolute inset-0 cursor-default"
         onClick={onClose}
       />
-      <div
+      <dialog
         ref={panelRef}
-        role="dialog"
+        open
         aria-modal="true"
         aria-labelledby={titleId}
-        className="relative max-h-[90dvh] w-full max-w-lg overflow-y-auto rounded-t-2xl bg-white p-6 shadow-xl sm:rounded-2xl"
+        className="relative max-h-[90dvh] w-full max-w-lg overflow-y-auto rounded-t-2xl bg-white p-6 text-inherit shadow-xl sm:rounded-2xl"
       >
         <div className="mb-4 flex items-start justify-between gap-4">
           <h2 id={titleId} className="text-xl font-bold">
@@ -54,7 +54,7 @@ export default function ModalShell({ title, onClose, children }: ModalShellProps
           </button>
         </div>
         {children}
-      </div>
+      </dialog>
     </div>
   );
 }

@@ -5,7 +5,7 @@ import type { ReactNode } from 'react';
 import { useRouter } from 'next/navigation';
 import { getAccessToken } from '@/helpers/apiHelper';
 
-export default function AuthLayout({ children }: { children: ReactNode }) {
+export default function AuthLayout({ children }: Readonly<{ children: ReactNode }>) {
   const router = useRouter();
 
   // Proteksi: pengguna yang sudah punya sesi dialihkan ke dashboard.
